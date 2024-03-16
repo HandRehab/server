@@ -14,7 +14,7 @@ async def validate_user(username: str, password: str):
                 doctorid = user.get("doctorid")
                 return {"message": "Success", "access": True, "userRole": user["userRole"], "doctorid": doctorid}
             else:
-                return {"message": "Success", "access": True, "userRole": user["userRole"]}
+                return {"message": "Success", "access": True, "userRole": user["userRole"],"name":user["name"]}
         else:
             return {"message": f"Password for {username} is wrong", "access": False}
     else:
