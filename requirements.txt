@@ -1,0 +1,13 @@
+fastapi
+pydantic
+pymongo
+python-dotenv
+uvicorn
+python-multipart
+requests
+motor
+pygame
+cv2
+numpy
+cvzone
+mediapipe
