@@ -7,7 +7,7 @@ python-multipart
 requests
 motor
 pygame
-cv2
 numpy
 cvzone
 mediapipe
+#cv2
