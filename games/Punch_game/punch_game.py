@@ -109,4 +109,4 @@ def start_punch():
     cv2.destroyAllWindows()
 
 # Example usage:
-start_punch()
+#start_punch()

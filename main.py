@@ -4,7 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Request
-from routes import register,auth,box,balloon,snake,ball,punch
+from routes import register,auth,box,balloon,snake,ball,punch,list
 
 
 app = FastAPI(title="HandRehab backend",
@@ -47,7 +47,7 @@ app.include_router(balloon.app)
 app.include_router(snake.app)
 app.include_router(ball.app)
 app.include_router(punch.app)
-
+app.include_router(list.app)
 
 @app.exception_handler(StarletteHTTPException)
 async def custom_http_exception_handler(request, exc):
