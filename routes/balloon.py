@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from games.BalloonPop.BalloonPop import start_balloon
@@ -6,15 +6,25 @@ import threading
 from queue import Queue
 import os
 from fastapi import APIRouter
+from db import get_db
+from schemas import createUserBody
+from pydantic import BaseModel
 
 app = APIRouter(
     tags=["balloon"]
 )
+db=get_db()
 
+class UsernameRequest(BaseModel):
+    username: str
 
-@app.get("/hi")
-async def main():
+@app.post("/balloon")
+async def main(username_request: UsernameRequest):
+        username = username_request.username
+        
+        
     # print(os.environ['VIRTUAL_ENV'])
+    
         result_queue = Queue()
         user_name = "Player1"
 
@@ -28,12 +38,19 @@ async def main():
         result = result_queue.get()
         print(result)
 
-        if(result["status"] == "Game over"):
-            data = {
+        
+        user= await db["users"].find_one({"username":username})
+        if user:
+            filter_criteria = {"username": username}
+            new_balloon_value = result["score"] 
+            update_operation = {"$set": {"balloon": new_balloon_value}}
+            res=await db["users"].update_one(filter_criteria, update_operation)
+        data = {
                 "username": user_name,
-                "score": result["score"]
+                "baloon": result["score"]
             }
-            print("DATA===", data)
+        print("DATA===", data)
+        print(username)
             # Sample code to insert to mongodb
             # result = collection.insert_one(data)
 

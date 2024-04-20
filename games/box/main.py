@@ -129,6 +129,7 @@ async def box_play():
         cv2.imshow("frame", img)
         if cv2.waitKey(1) & 0xFF == ord('q') or elapsed_time >= duration:
             break
+        return score
 
     cap.release()
     cv2.destroyAllWindows()

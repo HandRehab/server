@@ -40,7 +40,10 @@ async def create_user(body: createUserBody):
             "birthdate": body.birthdate,
             "gender": body.gender,
             "doctorid": body.doctorid,
-            "userRole": body.userRole
+            "userRole": body.userRole,
+            "box": body.box,
+            "balloon": body.balloon
+
         })
         
     try:

@@ -11,3 +11,5 @@ class createUserBody(BaseModel):
     doctorid: Optional[int] = None
     adminid: Optional[str] = None
     userRole: int
+    box: int
+    balloon: int
