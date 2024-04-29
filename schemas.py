@@ -13,3 +13,9 @@ class createUserBody(BaseModel):
     userRole: int
     box: int
     balloon: int
+
+#message schema
+class createMessageBody(BaseModel):
+    username: str
+    message: str
+    timestamp: str
