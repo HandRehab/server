@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, conint
 from typing import Optional
 
 class createUserBody(BaseModel):
@@ -11,10 +11,9 @@ class createUserBody(BaseModel):
     doctorid: Optional[int] = None
     adminid: Optional[str] = None
     userRole: int
-    box: int
-    balloon: int
+    box: Optional[dict] = None
+    balloon: Optional[dict] = None
 
-#message schema
 class createMessageBody(BaseModel):
     username: str
     message: str
