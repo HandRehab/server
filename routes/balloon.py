@@ -24,11 +24,11 @@ class BalloonData(BaseModel):
 
 class UsernameRequest(BaseModel):
     username: str
-
+#, balloon_data: BalloonData
 @app.post("/balloon")
-async def main(username_request: UsernameRequest, balloon_data: BalloonData):
+async def main(username_request: UsernameRequest):
     username = username_request.username
-    score = balloon_data.score
+    #score = balloon_data.score
 
     # Generate timestamp in the format "dd-mm-yyyy"
     timestamp = datetime.now().strftime("%d-%m-%Y")
@@ -45,13 +45,17 @@ async def main(username_request: UsernameRequest, balloon_data: BalloonData):
 
     # Retrieve the result from the queue
     result = result_queue.get()
+    res=result["score"]
+    
+    
+    
 
     # Update user's balloon data
     user = await db["users"].find_one({"username": username})
     if user:
         filter_criteria = {"username": username}
         # Update balloon data with timestamp and score
-        update_operation = {"$set": {"balloon." + timestamp: score}}
+        update_operation = {"$set": {"balloon." + timestamp: res}}
         await db["users"].update_one(filter_criteria, update_operation)
     
     return {"message": "Balloon data updated successfully"}

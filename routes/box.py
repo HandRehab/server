@@ -18,15 +18,15 @@ class BoxData(BaseModel):
     score: int
 class UsernameRequest(BaseModel):
     username: str
-
+#, box_data: BoxData
 @app.post("/play", operation_id="play_game")
-async def handle_play(username_request: UsernameRequest, box_data: BoxData):
+async def handle_play(username_request: UsernameRequest):
     username = username_request.username #fetch username from frontend
     logger.info("Handling play_game request")
     try:
         
         res= await box_play() #to maybe show from the game
-        score = box_data.score #to take from fastAPI docs
+        #score = box_data.score #to take from fastAPI docs
 
         #print(res)
         
@@ -36,7 +36,7 @@ async def handle_play(username_request: UsernameRequest, box_data: BoxData):
         if user:
             filter_criteria = {"username": username}
         # Update balloon data with timestamp and score
-            update_operation = {"$set": {"box." + timestamp: score}}
+            update_operation = {"$set": {"box." + timestamp: res}}
             await db["users"].update_one(filter_criteria, update_operation)
         return {"message": "Box data updated successfully"}
     except Exception as e:

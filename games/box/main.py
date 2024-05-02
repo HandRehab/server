@@ -6,7 +6,7 @@ import asyncio
 
 async def box_play():
     cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1000)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1100)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 
     color = (0, 0, 255)
